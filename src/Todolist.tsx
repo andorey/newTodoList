@@ -14,6 +14,7 @@ type PropsType = {
     removeTasks: (taskId: string) => void
     filterTasks: (value: FilterValueType) => void
     addTask: (value: string) => void
+    checkedItem: (value: string) => void
 }
 
 function ToDoList(props: PropsType) {
@@ -53,9 +54,11 @@ function ToDoList(props: PropsType) {
             <ul>{
                 props.tasks.map((el) => {
                     const removeTasksElement = () => props.removeTasks(el.id)
+                    const checkedItems = () => props.checkedItem(el.id)
+
                     return (
                         <li key={el.id}>
-                            <input type='checkbox' checked={el.isDone}/>
+                            <input type='checkbox' checked={el.isDone} onChange={checkedItems}/>
                             <span>{el.title}</span>
                             <button onClick={removeTasksElement}> X </button>
                         </li>)

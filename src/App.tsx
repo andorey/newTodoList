@@ -15,15 +15,18 @@ function App() {
         {id: v1(), title: 'GraphQL', isDone: false},
     ])
 
+    const checkedItems = (id: string) => {
+        tasks.map( el => el.id === id ? el.isDone = !el.isDone : el.isDone );
+        setTasks(tasks);
+    }
+
     const removeTasks = (id: string) => {
-        const removedTasks = tasks.filter( el => el.id !== id );
-        setTasks(removedTasks);
+        setTasks( tasks.filter( el => el.id !== id ) );
     }
 
     const addTask = (value: string) => {
-        const newTask = {id: v1(), title: value, isDone: false };
-        const newTasks = [newTask, ...tasks];
-        setTasks(newTasks)
+       //[newTask, ...tasks]
+        setTasks( [{id: v1(), title: value, isDone: false }, ...tasks] );
     }
 
 
@@ -51,6 +54,7 @@ function App() {
                       removeTasks={removeTasks}
                       filterTasks={filterTasks}
                       addTask={addTask}
+                      checkedItem={checkedItems}
             />
         </div>
     );
