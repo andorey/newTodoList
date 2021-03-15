@@ -17,7 +17,7 @@ function App() {
 
     const checkedItems = (id: string) => {
         tasks.map( el => el.id === id ? el.isDone = !el.isDone : el.isDone );
-        setTasks(tasks);
+        setTasks([...tasks]);
     }
 
     const removeTasks = (id: string) => {
@@ -25,7 +25,7 @@ function App() {
     }
 
     const addTask = (value: string) => {
-       //[newTask, ...tasks]
+        //[newTask, ...tasks]
         setTasks( [{id: v1(), title: value, isDone: false }, ...tasks] );
     }
 
