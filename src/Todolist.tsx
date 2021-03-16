@@ -15,7 +15,7 @@ type PropsType = {
     filterTasks: (value: FilterValueType) => void
     addTask: (value: string) => void
     checkedItem: (value: string) => void
-    activeButton: string
+    filter: string
 }
 
 
@@ -30,20 +30,20 @@ function ToDoList(props: PropsType) {
     }
 
     const onKeyPressInput = (e: KeyboardEvent<HTMLInputElement>) => {
-        if ( e.key === 'Enter' && newTaskTitle.trim() ) {
-            props.addTask( newTaskTitle.trim() )
+        if (e.key === 'Enter' && newTaskTitle.trim()) {
+            props.addTask(newTaskTitle.trim())
             setNewTaskTitle('')
-        }else{
+        } else {
             setError('Field is required')
         }
     }
 
     const onKeyPressButton = () => {
-        if ( newTaskTitle.trim() === '' ) {
+        if (newTaskTitle.trim() === '') {
             setError('Field is required')
             return
         }
-        props.addTask( newTaskTitle.trim() )
+        props.addTask(newTaskTitle.trim())
         setNewTaskTitle('')
     }
 
@@ -59,10 +59,10 @@ function ToDoList(props: PropsType) {
                 <input value={newTaskTitle}
                        onChange={onChangeInput}
                        onKeyPress={onKeyPressInput}
-                       className={ error ? 'error' : '' }
+                       className={error ? 'error' : ''}
                 />
                 <button className='inputButton' onClick={onKeyPressButton}>Add</button>
-                { error && <div className='input-error'>{ error }</div> }
+                {error && <div className='input-error'>{error}</div>}
             </div>
             <ul>{
                 props.tasks.map((el) => {
@@ -70,7 +70,7 @@ function ToDoList(props: PropsType) {
                     const checkedItems = () => props.checkedItem(el.id)
 
                     return (
-                        <li key={el.id}>
+                        <li key={el.id} className={ el.isDone ? 'is-done' : ''}>
                             <input type='checkbox' checked={el.isDone} onChange={checkedItems}/>
                             <span>{el.title}</span>
                             <button onClick={removeTasksElement}> X</button>
@@ -78,9 +78,15 @@ function ToDoList(props: PropsType) {
                 })
             }</ul>
             <div className='buttons'>
-                <button className={ props.activeButton === 'all' ? 'active-filter' : ''} onClick={allSelectButton}>All</button>
-                <button className={ props.activeButton === 'active' ? 'active-filter' : ''} onClick={activeSelectButton}>Active</button>
-                <button className={ props.activeButton === 'completed' ? 'active-filter' : ''} onClick={completedSelectButton}>Completed</button>
+                <button className={props.filter === 'all' ? 'active-filter' : ''}
+                        onClick={allSelectButton}>All
+                </button>
+                <button className={props.filter === 'active' ? 'active-filter' : ''}
+                        onClick={activeSelectButton}>Active
+                </button>
+                <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                        onClick={completedSelectButton}>Completed
+                </button>
             </div>
         </div>
     )

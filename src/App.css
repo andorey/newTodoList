@@ -53,3 +53,7 @@ li button:hover {
 .inputButton:hover {
     background-color: aquamarine;
 }
+
+.is-done {
+    color: silver;
+}
