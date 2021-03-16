@@ -12,3 +12,17 @@ li button {
     margin-left: 10px;
     border-radius: 10px;
 }
+
+.error {
+    border-color: red;
+}
+
+.input-error {
+    font-size: 0.8em;
+    margin-left: 20px;
+    color: red;
+}
+
+.active-filter {
+    background-color: aquamarine;
+}

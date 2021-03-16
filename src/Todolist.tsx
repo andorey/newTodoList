@@ -17,23 +17,33 @@ type PropsType = {
     checkedItem: (value: string) => void
 }
 
-function ToDoList(props: PropsType) {
-    const [newTaskTitle, setNewTaskTitle] = useState('');
 
-    const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => setNewTaskTitle(e.currentTarget.value)
+function ToDoList(props: PropsType) {
+
+    const [newTaskTitle, setNewTaskTitle] = useState('');
+    const [error, setError] = useState<string | null>(null);
+
+    const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setError(null)
+        setNewTaskTitle(e.currentTarget.value)
+    }
 
     const onKeyPressInput = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && newTaskTitle.trim()) {
-            props.addTask(newTaskTitle.trim())
+        if ( e.key === 'Enter' && newTaskTitle.trim() ) {
+            props.addTask( newTaskTitle.trim() )
             setNewTaskTitle('')
+        }else{
+            setError('Field is required')
         }
     }
 
     const onKeyPressButton = () => {
-        if (newTaskTitle.trim()) {
-            props.addTask(newTaskTitle.trim())
-            setNewTaskTitle('')
+        if ( newTaskTitle.trim() === '' ) {
+            setError('Field is required')
+            return
         }
+        props.addTask( newTaskTitle.trim() )
+        setNewTaskTitle('')
     }
 
     const allSelectButton = () => props.filterTasks('all')
@@ -48,8 +58,10 @@ function ToDoList(props: PropsType) {
                 <input value={newTaskTitle}
                        onChange={onChangeInput}
                        onKeyPress={onKeyPressInput}
+                       className={ error ? 'error' : '' }
                 />
                 <button onClick={onKeyPressButton}> Add</button>
+                { error && <div className='input-error'>{ error }</div> }
             </div>
             <ul>{
                 props.tasks.map((el) => {
@@ -60,12 +72,12 @@ function ToDoList(props: PropsType) {
                         <li key={el.id}>
                             <input type='checkbox' checked={el.isDone} onChange={checkedItems}/>
                             <span>{el.title}</span>
-                            <button onClick={removeTasksElement}> X </button>
+                            <button onClick={removeTasksElement}> X</button>
                         </li>)
                 })
             }</ul>
             <div>
-                <button onClick={allSelectButton}>All</button>
+                <button className='active-filter' onClick={allSelectButton}>All</button>
                 <button onClick={activeSelectButton}>Active</button>
                 <button onClick={completedSelectButton}>Completed</button>
             </div>

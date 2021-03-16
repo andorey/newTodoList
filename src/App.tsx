@@ -16,17 +16,18 @@ function App() {
     ])
 
     const checkedItems = (id: string) => {
-        tasks.map( el => el.id === id ? el.isDone = !el.isDone : el.isDone );
+        tasks.map(el => el.id === id ? el.isDone = !el.isDone : el.isDone);
+        // [ ...task ] ---> "spread operator" - destructuring
         setTasks([...tasks]);
     }
 
     const removeTasks = (id: string) => {
-        setTasks( tasks.filter( el => el.id !== id ) );
+        setTasks(tasks.filter(el => el.id !== id));
     }
 
     const addTask = (value: string) => {
         //[newTask, ...tasks]
-        setTasks( [{id: v1(), title: value, isDone: false }, ...tasks] );
+        setTasks([{id: v1(), title: value, isDone: false}, ...tasks]);
     }
 
 
@@ -35,10 +36,10 @@ function App() {
 
     let tasksForToDoList = tasks;
 
-    if(filter === 'active'){
+    if (filter === 'active') {
         tasksForToDoList = tasks.filter(el => !el.isDone);
     }
-    if(filter === 'completed'){
+    if (filter === 'completed') {
         tasksForToDoList = tasks.filter(el => el.isDone);
     }
     //-------------------------------------------------------------------------
