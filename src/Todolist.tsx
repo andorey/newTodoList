@@ -15,6 +15,7 @@ type PropsType = {
     filterTasks: (value: FilterValueType) => void
     addTask: (value: string) => void
     checkedItem: (value: string) => void
+    activeButton: string
 }
 
 
@@ -60,7 +61,7 @@ function ToDoList(props: PropsType) {
                        onKeyPress={onKeyPressInput}
                        className={ error ? 'error' : '' }
                 />
-                <button onClick={onKeyPressButton}> Add</button>
+                <button className='inputButton' onClick={onKeyPressButton}>Add</button>
                 { error && <div className='input-error'>{ error }</div> }
             </div>
             <ul>{
@@ -76,10 +77,10 @@ function ToDoList(props: PropsType) {
                         </li>)
                 })
             }</ul>
-            <div>
-                <button className='active-filter' onClick={allSelectButton}>All</button>
-                <button onClick={activeSelectButton}>Active</button>
-                <button onClick={completedSelectButton}>Completed</button>
+            <div className='buttons'>
+                <button className={ props.activeButton === 'all' ? 'active-filter' : ''} onClick={allSelectButton}>All</button>
+                <button className={ props.activeButton === 'active' ? 'active-filter' : ''} onClick={activeSelectButton}>Active</button>
+                <button className={ props.activeButton === 'completed' ? 'active-filter' : ''} onClick={completedSelectButton}>Completed</button>
             </div>
         </div>
     )

@@ -56,6 +56,7 @@ function App() {
                       filterTasks={filterTasks}
                       addTask={addTask}
                       checkedItem={checkedItems}
+                      activeButton={filter}
             />
         </div>
     );

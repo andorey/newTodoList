@@ -13,6 +13,11 @@ li button {
     border-radius: 10px;
 }
 
+li button:hover {
+    background-color: tomato;
+    color: whitesmoke;
+}
+
 .error {
     border-color: red;
 }
@@ -23,6 +28,28 @@ li button {
     color: red;
 }
 
+.buttons button{
+    font-size: 0.7em;
+    border-radius: 8px;
+    padding: 2px 10px;
+    margin-right: 5px;
+}
+
+.buttons button:hover{
+    background-color: aquamarine;
+}
+
 .active-filter {
+    background-color: aquamarine;
+}
+
+.inputButton {
+    font-size: 0.7em;
+    border-radius: 8px;
+    padding: 1px 10px;
+    margin-left: 5px;
+}
+
+.inputButton:hover {
     background-color: aquamarine;
 }
