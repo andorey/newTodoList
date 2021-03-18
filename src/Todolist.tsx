@@ -70,21 +70,21 @@ function ToDoList(props: PropsType) {
                     const checkedItems = () => props.checkedItem(el.id)
 
                     return (
-                        <li key={el.id} className={ el.isDone ? 'is-done' : ''}>
-                            <input type='checkbox' checked={el.isDone} onChange={checkedItems}/>
-                            <span>{el.title}</span>
+                        <li key={el.id} className={ el.isDone ? 'is-done' : '' }>
+                            <input type='checkbox' checked={ el.isDone } onChange={checkedItems}/>
+                            <span>{ el.title }</span>
                             <button onClick={removeTasksElement}> X</button>
                         </li>)
                 })
             }</ul>
             <div className='buttons'>
-                <button className={props.filter === 'all' ? 'active-filter' : ''}
+                <button className={ props.filter === 'all' ? 'active-filter' : '' }
                         onClick={allSelectButton}>All
                 </button>
-                <button className={props.filter === 'active' ? 'active-filter' : ''}
+                <button className={ props.filter === 'active' ? 'active-filter' : '' }
                         onClick={activeSelectButton}>Active
                 </button>
-                <button className={props.filter === 'completed' ? 'active-filter' : ''}
+                <button className={ props.filter === 'completed' ? 'active-filter' : '' }
                         onClick={completedSelectButton}>Completed
                 </button>
             </div>

@@ -1,6 +1,12 @@
+body {
+    background: url(./img/sky_star.jpg) no-repeat;
+    background-size: 100%;
+}
+
 .App {
     padding: 30px;
     display: flex;
+    color: white;
     align-items: center
 }
 
@@ -19,13 +25,14 @@ li button:hover {
 }
 
 .error {
-    border-color: red;
+    border: solid 2px tomato;
+    border-radius: 5px;
 }
 
 .input-error {
     font-size: 0.8em;
     margin-left: 20px;
-    color: red;
+    color: tomato;
 }
 
 .buttons button{
@@ -55,5 +62,5 @@ li button:hover {
 }
 
 .is-done {
-    color: silver;
+    color: gray;
 }
