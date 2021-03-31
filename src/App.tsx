@@ -30,30 +30,30 @@ function App() {
             {id: v1(), title: 'React', isDone: false},
         ],
         [todoListId_2]: [
-            {id: v1(), title: 'JavaScript', isDone: false},
-            {id: v1(), title: 'Redux', isDone: false},
-            {id: v1(), title: 'Angular', isDone: false},
+            {id: v1(), title: 'Car', isDone: false},
+            {id: v1(), title: 'Home', isDone: false},
+            {id: v1(), title: 'Computer', isDone: false},
         ],
     })
 
-    const checkedItems = (id: string) => {
-        tasks.map(el => el.id === id ? el.isDone = !el.isDone : el.isDone);
-        // [ ...task ] ---> "spread operator" - destructuring
-        setTasks([...tasks]);
+    const removeTasks = (id: string, todoListId: string) => {
+        tasks[todoListId] = tasks[todoListId].filter(el => el.id !== id)
+        setTasks({...tasks});
     }
 
-    const removeTasks = (id: string) => {
-        setTasks(tasks.filter(el => el.id !== id));
+    const addTask = (value: string, todoListId: string) => {
+        const newTask = {id: v1(), title: value, isDone: false}
+        setTasks({ ...tasks, [todoListId]:[newTask, ...tasks[todoListId]] });
     }
+    // [ ...task ] ---> "spread operator" - destructuring
 
-    const addTask = (value: string) => {
-        //[newTask, ...tasks]
-        setTasks([{id: v1(), title: value, isDone: false}, ...tasks]);
+    const checkedItems = (id: string, newIsDoneValue: boolean, todoListId: string) => {
+        tasks[todoListId] = tasks[todoListId].map(el => el.id === id ? {...el, isDone:newIsDoneValue} : el);
+        setTasks({ ...tasks});
     }
 
 
     // place where describe which filter will be in ToDoList -----------------
-    const [filter, setFilter] = useState<FilterValueType>('all')
 
     let tasksForToDoList = tasks;
 
