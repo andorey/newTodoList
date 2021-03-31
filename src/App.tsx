@@ -1,19 +1,40 @@
 import React, {useState} from 'react';
 import './App.css';
-import ToDoList from './Todolist';
+import ToDoList, {TaskType} from './Todolist';
 import {v1} from "uuid";
 
 export type FilterValueType = 'all' | 'completed' | 'active';
+export type TodoListType = {
+    id: string
+    filter: FilterValueType
+    title: string
+}
+export type TasksStateType = {
+    [key: string]: TaskType[]
+}
 
 function App() {
 
-    const [tasks, setTasks] = useState([
-        {id: v1(), title: 'HTML & CSS', isDone: true},
-        {id: v1(), title: 'JavaScript', isDone: true},
-        {id: v1(), title: 'React', isDone: false},
-        {id: v1(), title: 'Rest API', isDone: true},
-        {id: v1(), title: 'GraphQL', isDone: false},
+    const todoListId_1 = v1()
+    const todoListId_2 = v1()
+
+    const [todoLists, setTodoLists] = useState<TodoListType[]>([
+        {id: todoListId_1, filter: "all", title: 'what need I do'},
+        {id: todoListId_2, filter: "all", title: 'what need I buy'},
     ])
+
+    const [tasks, setTasks] = useState<TasksStateType>({
+        [todoListId_1]: [
+            {id: v1(), title: 'HTML', isDone: false},
+            {id: v1(), title: 'TypeScript', isDone: false},
+            {id: v1(), title: 'React', isDone: false},
+        ],
+        [todoListId_2]: [
+            {id: v1(), title: 'JavaScript', isDone: false},
+            {id: v1(), title: 'Redux', isDone: false},
+            {id: v1(), title: 'Angular', isDone: false},
+        ],
+    })
 
     const checkedItems = (id: string) => {
         tasks.map(el => el.id === id ? el.isDone = !el.isDone : el.isDone);

@@ -2,15 +2,15 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValueType} from "./App";
 
 
-type TasksType = {
+export type TaskType = {
     title: string
     id: string
     isDone: boolean
 }
 
-type PropsType = {
+export type PropsType = {
     title: string;
-    tasks: Array<TasksType>
+    tasks: Array<TaskType>
     removeTasks: (taskId: string) => void
     filterTasks: (value: FilterValueType) => void
     addTask: (value: string) => void
@@ -21,7 +21,7 @@ type PropsType = {
 
 function ToDoList(props: PropsType) {
 
-    const [newTaskTitle, setNewTaskTitle] = useState('');
+    const [newTaskTitle, setNewTaskTitle] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
 
     const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,14 +79,11 @@ function ToDoList(props: PropsType) {
             }</ul>
             <div className='buttons'>
                 <button className={ props.filter === 'all' ? 'active-filter' : '' }
-                        onClick={allSelectButton}>All
-                </button>
+                        onClick={allSelectButton}>All</button>
                 <button className={ props.filter === 'active' ? 'active-filter' : '' }
-                        onClick={activeSelectButton}>Active
-                </button>
+                        onClick={activeSelectButton}>Active</button>
                 <button className={ props.filter === 'completed' ? 'active-filter' : '' }
-                        onClick={completedSelectButton}>Completed
-                </button>
+                        onClick={completedSelectButton}>Completed</button>
             </div>
         </div>
     )
